@@ -6,7 +6,7 @@ let logo;
 
 function preload() {
   myFont = loadFont("../assets/antropos.otf");
-  // logo = loadImage("");
+  logo = loadImage("../assets/logo.svg");
 }
 
 function setup() {
@@ -16,10 +16,13 @@ function setup() {
 
 function draw() {
   background(0);
-  textAlign(CENTER);
-  textFont(myFont);
-  textSize(50);
-  fill(255);
-  text("Teste de foníáãte", width / 2, height / 2);
-  noLoop();
+  // textAlign(CENTER);
+  // textFont(myFont);
+  // textSize(50);
+  // fill(255);
+  // text("Teste de foníáãte", width / 2, height / 2);
+  if (logo) {
+    image(logo, width / 2, height / 2, width / 6, height / 6);
+  }
+  // noLoop();
 }
