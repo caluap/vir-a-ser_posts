@@ -1,10 +1,8 @@
 var canvas;
-let debug = false;
+let debug = true;
 
 let uploaded_img;
-let input;
-
-let no_background = false;
+let input, bg_slider;
 
 let myFont;
 let logo;
@@ -17,11 +15,8 @@ let n_mods = 24;
 let mod = w / n_mods;
 
 let current_background = -1;
-
-let tint_index = 0;
-
 let backgrounds = [
-  { src: "../assets/backgrounds/01.jpg", img: null, text_color: "#000000" },
+  { src: "../assets/backgrounds/01.jpg", img: null, text_color: "#ffffff" },
   { src: "../assets/backgrounds/02.jpg", img: null, text_color: "#ffffff" },
   { src: "../assets/backgrounds/03.jpg", img: null, text_color: "#000000" },
   { src: "../assets/backgrounds/04.jpg", img: null, text_color: "#ffffff" },
@@ -36,6 +31,7 @@ let backgrounds = [
   { src: "../assets/backgrounds/13.jpg", img: null, text_color: "#000000" }
 ];
 
+let tint_index = -1;
 let tints = ["#dea1db", "#ffdb73", "#f2bcbf", "#4ecde8", "#94dfe5"];
 
 let text_breakpoints = [120, 280, 340, 440, 700, 899];
@@ -54,22 +50,23 @@ function setup() {
   let controllers = createDiv();
   controllers.id("input-controllers");
 
+  bg_slider = createSlider(-1, 12, -1, 1);
+  bg_slider.mouseClicked(change_bg);
+
   input = createFileInput(handle_upload);
   input.id("file-input");
 
   controllers.child(input);
+  controllers.child(bg_slider);
   // input.position(0, 0);
 }
 
 function draw() {
   background(0);
 
-  let bg_ready = false;
+  let bg_ready = draw_background(current_background);
 
-  if (!no_background) {
-    bg_ready = draw_background(3);
-  }
-  if (bg_ready || no_background) {
+  if (bg_ready || current_background == -1) {
     // draw_logo(1, 1);
     // draw_logo(n_mods - mods_logo - 1, 1);
     // draw_logo(1, n_mods - mods_logo - 1);
@@ -196,7 +193,7 @@ function place_background(n) {
 }
 
 function draw_background(n = 0) {
-  if (n > backgrounds.length) {
+  if (n > backgrounds.length || n == -1) {
     return null;
   }
   current_background = n;
@@ -229,4 +226,14 @@ function draw_uploaded_img() {
   if (tint_index != -1) {
     noTint();
   }
+}
+
+// controller functions
+
+function change_bg() {
+  current_background = bg_slider.value();
+  if (debug) {
+    console.log(current_background);
+  }
+  redraw();
 }
