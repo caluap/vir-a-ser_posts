@@ -29,6 +29,10 @@ let backgrounds = [
   { src: "../assets/backgrounds/13.jpg", img: null, text_color: "#000000" }
 ];
 
+let text_breakpoints = [280, 340, 440, 700, 899];
+let sample_text =
+  "Aptent a quis id scelerisque elementum donec a quis ut arcu habitant natoque posuere tempor vestibulum id faucibus leo a. Mollis scelerisque a ante quis adipiscing a accumsan tincidunt vestibulum ut mattis justo sem lobortis nascetur habitant ullamcorper mi in dui faucibus a. Mi orci cubilia blandit at suspendisse magnis ullamcorper vestibulum penatibus in potenti justo nec augue cras ac ridiculus fringilla ullamcorper condimentum etiam quisque ipsum ut pretium mattis elit imperdiet. In quam eros suscipit natoque hac hendrerit a orci montes consectetur ac adipiscing nec adipiscing commodo adipiscing pretium mi a accumsan viverra habitasse a inceptos potenti. Mus iaculis enim ut mus orci et suscipit vestibulum dapibus a fermentum non orci luctus sed ullamcorper himenaeos dis ultrices vestibulum.Facilisis scelerisque gravida dictum eget hendrerit est nam dignissim at a accumsan consequat.";
+
 function preload() {
   myFont = loadFont("../assets/antropos.otf");
   logo = loadImage("../assets/logo.svg");
@@ -47,10 +51,7 @@ function draw() {
     // draw_logo(n_mods - mods_logo - 1, 1);
     // draw_logo(1, n_mods - mods_logo - 1);
     draw_logo(n_mods - mods_logo - 1, n_mods - mods_logo - 1);
-
-    draw_text(
-      "Blandit mi id neque dignissim fusce lorem morbi ut vestibulum netus vitae lectus suscipit ullamcorper enim magnis vestibulum est bibendum vestibulum nec suscipit ac. Parturient lectus pulvinar sagittis luctus a a hendrerit vestibulum leo parturient a arcu vulputate euismod dolor elit parturient vitae in eleifend condimentum ullamcorper pretium eu cubilia posuerelaoreet facilisi. Scelerisque hac nec mauris mattis nascetur est cursus eros ac class suspendisse donec nibh parturient mi vestibulum curabitur mi. Suspendisse vitae velit vestibulum habitant varius inceptos leo mi a ullamcorper erat pulvinar a quis luctus nisi sed. Facilisi elementum vestibulum parturient id ullamcorper potenti habitasse metus"
-    );
+    draw_text(sample_text.slice(0, text_breakpoints[0] - 1));
   } else {
     draw_text("carregando \n imagem....");
   }
@@ -122,13 +123,13 @@ function draw_text(t) {
 
   let ts,
     n = t.length;
-  if (n < 280) {
+  if (n < text_breakpoints[0]) {
     ts = 50;
-  } else if (n < 340) {
+  } else if (n < text_breakpoints[1]) {
     ts = 45;
-  } else if (n < 440) {
+  } else if (n < text_breakpoints[2]) {
     ts = 40;
-  } else if (n < 700) {
+  } else if (n < text_breakpoints[3]) {
     ts = 32;
     align = LEFT;
   } else {
