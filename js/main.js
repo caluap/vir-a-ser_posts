@@ -1,15 +1,14 @@
 var canvas;
-let debug = true;
-let draw_grid = true;
+let debug = false;
 
 let myFont;
 let logo;
-let mods_logo = 3;
+let mods_logo = 4;
 
 let w = 1080,
   h = 1080;
 
-let n_mods = 18;
+let n_mods = 24;
 let mod = w / n_mods;
 
 function preload() {
@@ -27,14 +26,14 @@ function draw() {
 
   // draw_logo(1, 1);
   // draw_logo(n_mods - mods_logo - 1, 1);
-  draw_logo(1, n_mods - mods_logo - 1);
+  // draw_logo(1, n_mods - mods_logo - 1);
   draw_logo(n_mods - mods_logo - 1, n_mods - mods_logo - 1);
 
   draw_text(
-    "A cubilia in purus cum odio parturient parturient suspendisse a et condimentum et senectus posuere hac porttitor facilisis et urna augue. Feugiat eleifend a facilisis a lectus habitasse aliquet commodo ut a a mattis justo lacus eros senectus egestas phasellus ornare nam. In aliquam a accumsan ligula tortor et egestas adipiscing "
+    "Blandit mi id neque dignissim fusce lorem morbi ut vestibulum netus vitae lectus suscipit ullamcorper enim magnis vestibulum est bibendum vestibulum nec suscipit ac. Parturient lectus pulvinar sagittis luctus a a hendrerit vestibulum leo parturient a arcu vulputate euismod dolor elit parturient vitae in eleifend condimentum ullamcorper pretium eu cubilia posuerelaoreet facilisi. Scelerisque hac nec mauris mattis nascetur est cursus eros ac class suspendisse donec nibh parturient mi vestibulum curabitur mi. Suspendisse vitae velit vestibulum habitant varius inceptos leo mi a ullamcorper erat pulvinar a quis luctus nisi sed. Facilisi elementum vestibulum parturient id ullamcorper potenti habitasse metus"
   );
 
-  if (draw_grid) {
+  if (debug) {
     stroke(255, 0, 0, 128);
     for (let x = 1; x <= n_mods; x++) {
       line(x * mod, 0, x * mod, height);
@@ -77,18 +76,42 @@ function draw_logo(x, y) {
 }
 
 function draw_text(t) {
-  fill(255, 0, 255);
+  let text_m = 2;
+  let text_m_y = 5 / 2;
+
+  let tx = _mod(text_m),
+    ty = _mod(text_m * text_m_y),
+    tw = _mod(n_mods - text_m * 2),
+    th = _mod(n_mods - text_m * 2 * text_m_y);
+
+  if (debug) {
+    fill(255, 0, 255, 255 / 4);
+    rect(tx, ty, tw, th);
+  }
 
   rectMode(CORNER);
-  textAlign(CENTER, CENTER);
   textFont(myFont);
-  textSize(50);
+
+  let align = CENTER;
+
+  let ts,
+    n = t.length;
+  if (n < 280) {
+    ts = 50;
+  } else if (n < 340) {
+    ts = 45;
+  } else if (n < 440) {
+    ts = 40;
+  } else if (n < 700) {
+    ts = 32;
+    align = LEFT;
+  } else {
+    ts = 25;
+    align = LEFT;
+  }
+
+  textAlign(align, CENTER);
+  textSize(ts);
   fill(255);
-  text(
-    t,
-    _mod(1),
-    _mod(1),
-    _mod(n_mods - 2),
-    _mod(-1 + n_mods - 1 - mods_logo - 1)
-  );
+  text(t, tx, ty, tw, th);
 }
