@@ -1,5 +1,6 @@
 var canvas;
 let debug = true;
+let grid = true;
 
 let myFont;
 let logo;
@@ -24,5 +25,18 @@ function draw() {
   if (logo) {
     image(logo, width / 2, height / 2, width / 6, height / 6);
   }
-  // noLoop();
+
+  if (grid) {
+    stroke(255, 0, 0, 128);
+    let n_mod = 24;
+    let mod = width / n_mod;
+    for (let x = 1; x <= n_mod; x++) {
+      line(x * mod, 0, x * mod, height);
+    }
+    for (let y = 1; y <= n_mod; y++) {
+      line(0, y * mod, width, y * mod);
+    }
+  }
+
+  noLoop();
 }
