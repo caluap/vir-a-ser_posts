@@ -9,7 +9,7 @@ let mods_logo = 3;
 let w = 1080,
   h = 1080;
 
-let n_mods = 24;
+let n_mods = 18;
 let mod = w / n_mods;
 
 function preload() {
@@ -24,16 +24,15 @@ function setup() {
 
 function draw() {
   background(0);
-  // textAlign(CENTER);
-  // textFont(myFont);
-  // textSize(50);
-  // fill(255);
-  // text("Teste de foníáãte", width / 2, height / 2);
 
-  draw_logo(1, 1);
+  // draw_logo(1, 1);
+  // draw_logo(n_mods - mods_logo - 1, 1);
   draw_logo(1, n_mods - mods_logo - 1);
-  draw_logo(n_mods - mods_logo - 1, 1);
   draw_logo(n_mods - mods_logo - 1, n_mods - mods_logo - 1);
+
+  draw_text(
+    "A cubilia in purus cum odio parturient parturient suspendisse a et condimentum et senectus posuere hac porttitor facilisis et urna augue. Feugiat eleifend a facilisis a lectus habitasse aliquet commodo ut a a mattis justo lacus eros senectus egestas phasellus ornare nam. In aliquam a accumsan ligula tortor et egestas adipiscing "
+  );
 
   if (draw_grid) {
     stroke(255, 0, 0, 128);
@@ -48,11 +47,20 @@ function draw() {
   noLoop();
 }
 
+// grid functions
+
+function _mod(n) {
+  if (n > n_mods + 1 || n < 0) {
+    return null;
+  }
+  return n * mod;
+}
+
 function grid(x, y) {
   if (x > n_mods + 1 || y > n_mods + 1 || x < 0 || y < 0) {
     return null;
   }
-  return createVector(x * mod, y * mod);
+  return createVector(_mod(x), _mod(y));
 }
 
 /// drawing functions
@@ -66,4 +74,21 @@ function draw_logo(x, y) {
       sh = mod * mods_logo;
     image(logo, c.x, c.y, sw, sh);
   }
+}
+
+function draw_text(t) {
+  fill(255, 0, 255);
+
+  rectMode(CORNER);
+  textAlign(CENTER, CENTER);
+  textFont(myFont);
+  textSize(50);
+  fill(255);
+  text(
+    t,
+    _mod(1),
+    _mod(1),
+    _mod(n_mods - 2),
+    _mod(-1 + n_mods - 1 - mods_logo - 1)
+  );
 }
