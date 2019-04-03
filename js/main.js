@@ -11,20 +11,22 @@ let w = 1080,
 let n_mods = 24;
 let mod = w / n_mods;
 
+let current_background = -1;
+
 let backgrounds = [
-  { src: "../assets/backgrounds/01.jpg", img: null },
-  { src: "../assets/backgrounds/02.jpg", img: null },
-  { src: "../assets/backgrounds/03.jpg", img: null },
-  { src: "../assets/backgrounds/04.jpg", img: null },
-  { src: "../assets/backgrounds/05.jpg", img: null },
-  { src: "../assets/backgrounds/06.jpg", img: null },
-  { src: "../assets/backgrounds/07.jpg", img: null },
-  { src: "../assets/backgrounds/08.jpg", img: null },
-  { src: "../assets/backgrounds/09.jpg", img: null },
-  { src: "../assets/backgrounds/10.jpg", img: null },
-  { src: "../assets/backgrounds/11.jpg", img: null },
-  { src: "../assets/backgrounds/12.jpg", img: null },
-  { src: "../assets/backgrounds/13.jpg", img: null }
+  { src: "../assets/backgrounds/01.jpg", img: null, text_color: "#000000" },
+  { src: "../assets/backgrounds/02.jpg", img: null, text_color: "#ffffff" },
+  { src: "../assets/backgrounds/03.jpg", img: null, text_color: "#000000" },
+  { src: "../assets/backgrounds/04.jpg", img: null, text_color: "#ffffff" },
+  { src: "../assets/backgrounds/05.jpg", img: null, text_color: "#000000" },
+  { src: "../assets/backgrounds/06.jpg", img: null, text_color: "#ffffff" },
+  { src: "../assets/backgrounds/07.jpg", img: null, text_color: "#ffffff" },
+  { src: "../assets/backgrounds/08.jpg", img: null, text_color: "#ffffff" },
+  { src: "../assets/backgrounds/09.jpg", img: null, text_color: "#000000" },
+  { src: "../assets/backgrounds/10.jpg", img: null, text_color: "#ffffff" },
+  { src: "../assets/backgrounds/11.jpg", img: null, text_color: "#ffffff" },
+  { src: "../assets/backgrounds/12.jpg", img: null, text_color: "#ffffff" },
+  { src: "../assets/backgrounds/13.jpg", img: null, text_color: "#000000" }
 ];
 
 function preload() {
@@ -40,7 +42,7 @@ function setup() {
 function draw() {
   background(0);
 
-  if (draw_background(0)) {
+  if (draw_background(3)) {
     // draw_logo(1, 1);
     // draw_logo(n_mods - mods_logo - 1, 1);
     // draw_logo(1, n_mods - mods_logo - 1);
@@ -136,7 +138,13 @@ function draw_text(t) {
 
   textAlign(align, CENTER);
   textSize(ts);
-  fill(255);
+
+  // some images require dark text; some, light.
+  if (current_background != -1) {
+    fill(backgrounds[current_background].text_color);
+  } else {
+    fill(255);
+  }
   text(t, tx, ty, tw, th);
 }
 
@@ -149,6 +157,7 @@ function draw_background(n = 0) {
   if (n > backgrounds.length) {
     return null;
   }
+  current_background = n;
   if (backgrounds[n].img == null) {
     // will wait until image is load to continue drawing
     loadImage(backgrounds[n].src, img => {
