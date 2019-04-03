@@ -18,6 +18,8 @@ let mod = w / n_mods;
 
 let current_background = -1;
 
+let tint_index = -1;
+
 let backgrounds = [
   { src: "../assets/backgrounds/01.jpg", img: null, text_color: "#000000" },
   { src: "../assets/backgrounds/02.jpg", img: null, text_color: "#ffffff" },
@@ -33,6 +35,8 @@ let backgrounds = [
   { src: "../assets/backgrounds/12.jpg", img: null, text_color: "#ffffff" },
   { src: "../assets/backgrounds/13.jpg", img: null, text_color: "#000000" }
 ];
+
+let tints = ["#dea1db", "#ffdb73", "#f2bcbf", "#4ecde8", "#94dfe5"];
 
 let text_breakpoints = [280, 340, 440, 700, 899];
 let sample_text =
@@ -201,6 +205,9 @@ function draw_background(n = 0) {
 }
 
 function draw_uploaded_img() {
+  if (tint_index != -1) {
+    tint(tints[tint_index]);
+  }
   if (uploaded_img.width > uploaded_img.height) {
     let ratio = width / uploaded_img.height;
     let new_width = uploaded_img.width * ratio;
@@ -209,5 +216,8 @@ function draw_uploaded_img() {
     let ratio = width / uploaded_img.width;
     let new_height = uploaded_img.height * ratio;
     image(uploaded_img, 0, height / 2 - new_height / 2, w, new_height);
+  }
+  if (tint_index != -1) {
+    noTint();
   }
 }
