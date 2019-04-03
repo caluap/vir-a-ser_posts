@@ -1,0 +1,21 @@
+$pad: 18px;
+
+body {
+  // min-height: 1080px;
+  // min-width: 1080px;
+  background: #ccc;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  // overflow-y: hidden;
+}
+
+.canv {
+  margin: $pad;
+  transform-origin: left top;
+  // transform: scale(0.6);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
