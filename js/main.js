@@ -18,7 +18,7 @@ let mod = w / n_mods;
 
 let current_background = -1;
 
-let tint_index = -1;
+let tint_index = 0;
 
 let backgrounds = [
   { src: "../assets/backgrounds/01.jpg", img: null, text_color: "#000000" },
@@ -51,8 +51,14 @@ function setup() {
   canvas = createCanvas(w, h);
   canvas.class("canv");
 
+  let controllers = createDiv();
+  controllers.id("input-controllers");
+
   input = createFileInput(handle_upload);
-  input.position(0, 0);
+  input.id("file-input");
+
+  controllers.child(input);
+  // input.position(0, 0);
 }
 
 function draw() {
