@@ -1,6 +1,11 @@
 var canvas;
 let debug = false;
 
+let uploaded_img;
+let input;
+
+let no_background = false;
+
 let myFont;
 let logo;
 let mods_logo = 4;
@@ -41,15 +46,27 @@ function preload() {
 function setup() {
   canvas = createCanvas(w, h);
   canvas.class("canv");
+
+  input = createFileInput(handle_upload);
+  input.position(0, 0);
 }
 
 function draw() {
   background(0);
 
-  if (draw_background(3)) {
+  let bg_ready = false;
+
+  if (!no_background) {
+    bg_ready = draw_background(3);
+  }
+  if (bg_ready || no_background) {
     // draw_logo(1, 1);
     // draw_logo(n_mods - mods_logo - 1, 1);
     // draw_logo(1, n_mods - mods_logo - 1);
+
+    if (uploaded_img) {
+      draw_uploaded_img();
+    }
     draw_logo(n_mods - mods_logo - 1, n_mods - mods_logo - 1);
     draw_text(sample_text.slice(0, text_breakpoints[0] - 1));
   } else {
@@ -61,6 +78,17 @@ function draw() {
   }
 
   noLoop();
+}
+
+function handle_upload(file) {
+  if (file.type === "image") {
+    uploaded_img = loadImage(file.data, () => {
+      redraw();
+      if (debug) {
+        console.log("Uploaded image loaded successfully!");
+      }
+    });
+  }
 }
 
 // grid functions
@@ -169,5 +197,17 @@ function draw_background(n = 0) {
   } else {
     image(backgrounds[n].img, 0, 0);
     return true;
+  }
+}
+
+function draw_uploaded_img() {
+  if (uploaded_img.width > uploaded_img.height) {
+    let ratio = width / uploaded_img.height;
+    let new_width = uploaded_img.width * ratio;
+    image(uploaded_img, width / 2 - new_width / 2, 0, new_width, h);
+  } else {
+    let ratio = width / uploaded_img.width;
+    let new_height = uploaded_img.height * ratio;
+    image(uploaded_img, 0, height / 2 - new_height / 2, w, new_height);
   }
 }
