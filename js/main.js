@@ -161,7 +161,6 @@ function draw_background(n = 0) {
   if (backgrounds[n].img == null) {
     // will wait until image is load to continue drawing
     loadImage(backgrounds[n].src, img => {
-      loop();
       backgrounds[n].img = img;
       place_background(n);
     });
