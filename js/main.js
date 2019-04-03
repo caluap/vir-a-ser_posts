@@ -2,7 +2,7 @@ var canvas;
 let debug = true;
 
 let uploaded_img;
-let input, bg_slider;
+let input, bg_slider, tint_slider;
 
 let myFont;
 let logo;
@@ -31,7 +31,7 @@ let backgrounds = [
   { src: "../assets/backgrounds/13.jpg", img: null, text_color: "#000000" }
 ];
 
-let tint_index = -1;
+let current_tint = -1;
 let tints = ["#dea1db", "#ffdb73", "#f2bcbf", "#4ecde8", "#94dfe5"];
 
 let text_breakpoints = [120, 280, 340, 440, 700, 899];
@@ -50,14 +50,18 @@ function setup() {
   let controllers = createDiv();
   controllers.id("input-controllers");
 
-  bg_slider = createSlider(-1, 12, -1, 1);
+  bg_slider = createSlider(-1, backgrounds.length - 1, -1, 1);
   bg_slider.mouseClicked(change_bg);
+
+  tint_slider = createSlider(-1, tints.length - 1, -1, 1);
+  tint_slider.mouseClicked(change_tint);
 
   input = createFileInput(handle_upload);
   input.id("file-input");
 
   controllers.child(input);
   controllers.child(bg_slider);
+  controllers.child(tint_slider);
   // input.position(0, 0);
 }
 
@@ -211,8 +215,8 @@ function draw_background(n = 0) {
 }
 
 function draw_uploaded_img() {
-  if (tint_index != -1) {
-    tint(tints[tint_index]);
+  if (current_tint != -1) {
+    tint(tints[current_tint]);
   }
   if (uploaded_img.width > uploaded_img.height) {
     let ratio = width / uploaded_img.height;
@@ -223,7 +227,7 @@ function draw_uploaded_img() {
     let new_height = uploaded_img.height * ratio;
     image(uploaded_img, 0, height / 2 - new_height / 2, w, new_height);
   }
-  if (tint_index != -1) {
+  if (current_tint != -1) {
     noTint();
   }
 }
@@ -234,6 +238,14 @@ function change_bg() {
   current_background = bg_slider.value();
   if (debug) {
     console.log(current_background);
+  }
+  redraw();
+}
+
+function change_tint() {
+  current_tint = tint_slider.value();
+  if (debug) {
+    console.log(current_tint);
   }
   redraw();
 }
