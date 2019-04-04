@@ -1,5 +1,5 @@
 var canvas;
-let debug = true;
+let debug = false;
 
 let uploaded_img;
 let input, bg_slider, tint_slider;
@@ -182,11 +182,31 @@ function draw_text(t) {
   textAlign(align, CENTER);
   textSize(ts);
 
-  // some images require dark text; some, light.
-  if (current_background != -1) {
+  // some images require dark text; some, light
+  if (current_background != -1 && !uploaded_img) {
     fill(backgrounds[current_background].text_color);
   } else {
-    fill(255);
+    if (uploaded_img) {
+      let sum_c = 0;
+      loadPixels();
+      for (let x = tx; x < tw; x++) {
+        for (let y = ty; y < th; y++) {
+          let off = y * width + x;
+          sum_c += (pixels[off] + pixels[off + 1] + pixels[off + 2]) / 3;
+        }
+      }
+      let avg = sum_c / ((tw - tx) * (th - ty));
+      console.log(avg);
+      // lightish gray (it prefers to choose white text)
+      if (avg > (255 * 3) / 4) {
+        fill(0);
+      } else {
+        // darkish gray
+        fill(255);
+      }
+    } else {
+      fill(255);
+    }
   }
   text(t, tx, ty, tw, th);
 }
