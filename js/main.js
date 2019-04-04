@@ -380,5 +380,10 @@ function change_tint() {
   redraw();
 }
 
-funtion change_text() {
+function change_text() {
+  let new_text = prompt("Digite o novo texto", "");
+  if (new_text != null && new_text != "") {
+    sample_text = new_text;
+    redraw();
+  }
 }
