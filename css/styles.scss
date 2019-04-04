@@ -37,4 +37,19 @@ body {
   padding: $pad;
 
   display: flex;
+  align-items: center;
+  & > * {
+    flex-grow: 1;
+  }
+}
+
+.slider-container {
+  padding: 0 $pad/2;
+  input[type="range"] {
+    width: 100%;
+  }
+}
+
+.fake-title {
+  font-weight: 700;
 }

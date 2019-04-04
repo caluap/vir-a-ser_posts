@@ -122,6 +122,7 @@ function preload() {
 function setup() {
   canvas = createCanvas(w, h);
   canvas.class("canv");
+  canvas.mouseClicked(change_text);
 
   let controllers = createDiv();
   controllers.id("input-controllers");
@@ -132,8 +133,8 @@ function setup() {
   bg_slider.class("slider");
   bg_slider.id("bg-slider");
 
-  let h_bg = createP("Aquarela de fundo");
-  p_bg = createP("Nenhuma");
+  let h_bg = createP("Aquarela de fundo").class("fake-title");
+  p_bg = createP("Nenhuma").class("slider-data");
 
   let bg_slider_container = createDiv();
   bg_slider_container.class("slider-container");
@@ -147,8 +148,8 @@ function setup() {
   tint_slider.class("slider");
   tint_slider.id("tint-slider");
 
-  let h_tint = createP("Cor na imagem");
-  p_tint = createP("Nenhuma");
+  let h_tint = createP("Cor na imagem").class("fake-title");
+  p_tint = createP("Nenhuma").class("slider-data");
 
   let tint_slider_container = createDiv();
   tint_slider_container.class("slider-container");
@@ -159,8 +160,8 @@ function setup() {
   input = createFileInput(handle_upload);
   input.id("file-input");
 
-  controllers.child(input);
   controllers.child(bg_slider_container);
+  controllers.child(input);
   controllers.child(tint_slider_container);
   // input.position(0, 0);
 }
@@ -377,4 +378,7 @@ function change_tint() {
     console.log(current_tint);
   }
   redraw();
+}
+
+funtion change_text() {
 }
