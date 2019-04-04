@@ -3,6 +3,7 @@ let debug = false;
 
 let uploaded_img;
 let input, bg_slider, tint_slider;
+let p_tint, p_bg;
 
 let myFont;
 let logo;
@@ -16,23 +17,98 @@ let mod = w / n_mods;
 
 let current_background = -1;
 let backgrounds = [
-  { src: "../assets/backgrounds/01.jpg", img: null, text_color: "#ffffff" },
-  { src: "../assets/backgrounds/02.jpg", img: null, text_color: "#ffffff" },
-  { src: "../assets/backgrounds/03.jpg", img: null, text_color: "#000000" },
-  { src: "../assets/backgrounds/04.jpg", img: null, text_color: "#ffffff" },
-  { src: "../assets/backgrounds/05.jpg", img: null, text_color: "#000000" },
-  { src: "../assets/backgrounds/06.jpg", img: null, text_color: "#ffffff" },
-  { src: "../assets/backgrounds/07.jpg", img: null, text_color: "#ffffff" },
-  { src: "../assets/backgrounds/08.jpg", img: null, text_color: "#ffffff" },
-  { src: "../assets/backgrounds/09.jpg", img: null, text_color: "#000000" },
-  { src: "../assets/backgrounds/10.jpg", img: null, text_color: "#ffffff" },
-  { src: "../assets/backgrounds/11.jpg", img: null, text_color: "#ffffff" },
-  { src: "../assets/backgrounds/12.jpg", img: null, text_color: "#ffffff" },
-  { src: "../assets/backgrounds/13.jpg", img: null, text_color: "#000000" }
+  {
+    src: "../assets/backgrounds/01.jpg",
+    name: "Água-marinha",
+    img: null,
+    text_color: "#ffffff"
+  },
+  {
+    src: "../assets/backgrounds/02.jpg",
+    name: "Esmeralda",
+    img: null,
+    text_color: "#ffffff"
+  },
+  {
+    src: "../assets/backgrounds/03.jpg",
+    name: "Rosa claro",
+    img: null,
+    text_color: "#000000"
+  },
+  {
+    src: "../assets/backgrounds/04.jpg",
+    name: "Rosa profundo",
+    img: null,
+    text_color: "#ffffff"
+  },
+  {
+    src: "../assets/backgrounds/05.jpg",
+    name: "Azul taparuere",
+    img: null,
+    text_color: "#000000"
+  },
+  {
+    src: "../assets/backgrounds/06.jpg",
+    name: "Azul flor de milho",
+    img: null,
+    text_color: "#ffffff"
+  },
+  {
+    src: "../assets/backgrounds/07.jpg",
+    name: "Verde fluorescente",
+    img: null,
+    text_color: "#ffffff"
+  },
+  {
+    src: "../assets/backgrounds/08.jpg",
+    name: "Verde lima",
+    img: null,
+    text_color: "#ffffff"
+  },
+  {
+    src: "../assets/backgrounds/09.jpg",
+    name: "Orquídea / Ciano",
+    img: null,
+    text_color: "#000000"
+  },
+  {
+    src: "../assets/backgrounds/10.jpg",
+    name: "Celeste",
+    img: null,
+    text_color: "#ffffff"
+  },
+  {
+    src: "../assets/backgrounds/11.jpg",
+    name: "Heliotrópio",
+    img: null,
+    text_color: "#ffffff"
+  },
+  {
+    src: "../assets/backgrounds/12.jpg",
+    name: "Jambo",
+    img: null,
+    text_color: "#ffffff"
+  },
+  {
+    src: "../assets/backgrounds/13.jpg",
+    name: "Jasmine",
+    img: null,
+    text_color: "#000000"
+  }
 ];
 
 let current_tint = -1;
-let tints = ["#dea1db", "#ffdb73", "#f2bcbf", "#4ecde8", "#94dfe5"];
+let tints = [
+  { color: "#00CCEE", name: "Azul turquesa" },
+  { color: "#ECDB00", name: "Amarelo brasilis" },
+  { color: "#7B68EE", name: "Azul ardósia " },
+  { color: "#007FFF", name: "Azul celeste" },
+  { color: "#FF7F50", name: "Coral" },
+  { color: "#B53389", name: "Fandango" },
+  { color: "#00A86B", name: "Jade" },
+  { color: "#CD69CD", name: "Rosa" },
+  { color: "#B22222", name: "Tijolo" }
+];
 
 let text_breakpoints = [120, 280, 340, 440, 700, 899];
 let sample_text =
@@ -50,18 +126,42 @@ function setup() {
   let controllers = createDiv();
   controllers.id("input-controllers");
 
+  // background slider
   bg_slider = createSlider(-1, backgrounds.length - 1, -1, 1);
-  bg_slider.mouseClicked(change_bg);
+  bg_slider.changed(change_bg);
+  bg_slider.class("slider");
+  bg_slider.id("bg-slider");
 
+  let h_bg = createP("Aquarela de fundo");
+  p_bg = createP("Nenhuma");
+
+  let bg_slider_container = createDiv();
+  bg_slider_container.class("slider-container");
+  bg_slider_container.child(h_bg);
+  bg_slider_container.child(p_bg);
+  bg_slider_container.child(bg_slider);
+
+  // tint slider
   tint_slider = createSlider(-1, tints.length - 1, -1, 1);
-  tint_slider.mouseClicked(change_tint);
+  tint_slider.changed(change_tint);
+  tint_slider.class("slider");
+  tint_slider.id("tint-slider");
+
+  let h_tint = createP("Cor na imagem");
+  p_tint = createP("Nenhuma");
+
+  let tint_slider_container = createDiv();
+  tint_slider_container.class("slider-container");
+  tint_slider_container.child(h_tint);
+  tint_slider_container.child(p_tint);
+  tint_slider_container.child(tint_slider);
 
   input = createFileInput(handle_upload);
   input.id("file-input");
 
   controllers.child(input);
-  controllers.child(bg_slider);
-  controllers.child(tint_slider);
+  controllers.child(bg_slider_container);
+  controllers.child(tint_slider_container);
   // input.position(0, 0);
 }
 
@@ -196,7 +296,6 @@ function draw_text(t) {
         }
       }
       let avg = sum_c / ((tw - tx) * (th - ty));
-      console.log(avg);
       // lightish gray (it prefers to choose white text)
       if (avg > (255 * 3) / 4) {
         fill(0);
@@ -236,7 +335,7 @@ function draw_background(n = 0) {
 
 function draw_uploaded_img() {
   if (current_tint != -1) {
-    tint(tints[current_tint]);
+    tint(tints[current_tint].color);
   }
   if (uploaded_img.width > uploaded_img.height) {
     let ratio = width / uploaded_img.height;
@@ -256,6 +355,11 @@ function draw_uploaded_img() {
 
 function change_bg() {
   current_background = bg_slider.value();
+  if (current_background == -1) {
+    p_bg.html("Nenhuma");
+  } else {
+    p_bg.html(backgrounds[current_background].name);
+  }
   if (debug) {
     console.log(current_background);
   }
@@ -264,6 +368,11 @@ function change_bg() {
 
 function change_tint() {
   current_tint = tint_slider.value();
+  if (current_tint == -1) {
+    p_tint.html("Nenhuma");
+  } else {
+    p_tint.html(tints[current_tint].name);
+  }
   if (debug) {
     console.log(current_tint);
   }
