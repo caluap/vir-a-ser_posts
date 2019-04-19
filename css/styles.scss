@@ -41,6 +41,7 @@ body {
   & > * {
     flex-grow: 1;
   }
+  display: none;
 }
 
 .slider-container {
@@ -52,4 +53,93 @@ body {
 
 .fake-title {
   font-weight: 700;
+}
+
+#control-panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  width: 24rem;
+  background: white;
+
+  display: grid;
+  grid-gap: $pad;
+  padding: $pad;
+
+  h3 {
+    margin: 0;
+    grid-column: 1 / -1;
+  }
+}
+
+#misc-panel {
+  display: grid;
+  grid-gap: $pad;
+}
+
+$bord: 4px;
+$bord-c: blue;
+
+#logo-placement {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-row-gap: $pad/4;
+  grid-column-gap: $pad;
+  .logo-sim {
+    display: block;
+    height: 4rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    background: black;
+    position: relative;
+    // border: $bord solid transparent;
+    &:hover,
+    &.selected {
+      background: $bord-c;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      width: $pad;
+      height: $pad;
+      border-radius: 50%;
+      background: white;
+    }
+    &.bottom:after {
+      bottom: $pad/3;
+    }
+    &.top:after {
+      top: $pad/3;
+    }
+    &.left:after {
+      left: $pad/3;
+    }
+    &.right:after {
+      right: $pad/3;
+    }
+  }
+}
+
+#watercolor-background {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: $pad;
+
+  a {
+    cursor: pointer;
+    img {
+      border: $bord solid transparent;
+      border-radius: 50%;
+      width: calc(100% - #{2 * $bord});
+    }
+    width: 100%;
+    display: block;
+    font-size: 0;
+    &:hover img,
+    &.selected img {
+      border-color: $bord-c;
+    }
+  }
 }
