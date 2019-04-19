@@ -1,5 +1,8 @@
 $pad: 18px;
 
+$bord: 4px;
+$bord-c: blue;
+
 body,
 * {
   font-family: "IBM Plex Mono", monospace;
@@ -87,13 +90,25 @@ body {
   }
 }
 
+#tints-panel {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: $pad;
+  .tint {
+    cursor: pointer;
+    min-height: 2rem;
+    border: $bord solid transparent;
+    &:hover,
+    &.selected {
+      border-color: $bord-c;
+    }
+  }
+}
+
 #misc-panel {
   display: grid;
   grid-gap: $pad;
 }
-
-$bord: 4px;
-$bord-c: blue;
 
 #logo-placement {
   display: grid;
