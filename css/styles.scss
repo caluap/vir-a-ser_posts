@@ -74,6 +74,19 @@ body {
   }
 }
 
+#text-panel {
+  textarea {
+    margin-top: $pad/4;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 15px;
+    padding: $pad/3;
+    border: none;
+    background: #eee;
+    min-height: 8rem;
+  }
+}
+
 #misc-panel {
   display: grid;
   grid-gap: $pad;
