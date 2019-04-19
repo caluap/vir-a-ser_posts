@@ -17,6 +17,17 @@ body {
   // overflow-y: hidden;
 }
 
+.generic-button {
+  background: black;
+  border: none;
+  border-radius: 1rem;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  padding: $pad/2 $pad;
+  width: 100%;
+}
+
 .canv {
   margin: $pad;
   transform-origin: left top;
