@@ -93,11 +93,19 @@
         </div>
       </div>
       <div id="save-panel" class="panel">
-        <button class="generic-button">Salvar</button>
+        <button class="generic-button" onclick="save_img()">
+          Salvar
+        </button>
       </div>
     </div>
 
     <script type="text/javascript">
+      function save_img() {
+        let now = new Date();
+        let clock = now.getHours() + "·" + now.getMinutes();
+        let day = now.toJSON().slice(0, 10);
+        saveCanvas(canvas, "post-" + day + "-" + clock, "jpg");
+      }
       document.getElementById("post-text").onchange = function() {
         change_text();
       };
