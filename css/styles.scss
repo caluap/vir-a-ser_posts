@@ -41,6 +41,11 @@ body {
 #file-input {
 }
 
+#image-upload-panel {
+  display: grid;
+  grid-gap: $pad/2;
+}
+
 #input-controllers {
   position: fixed;
   left: 0;
@@ -88,7 +93,13 @@ body {
   }
 }
 
+.panel {
+  display: grid;
+  grid-gap: $pad;
+}
+
 #text-panel {
+  grid-gap: 0;
   textarea {
     margin-top: $pad/4;
     box-sizing: border-box;
@@ -104,10 +115,10 @@ body {
 #tints-panel {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-gap: $pad;
+  grid-gap: $pad/2;
   .tint {
     cursor: pointer;
-    min-height: 2rem;
+    min-height: 1rem;
     border: $bord solid transparent;
     &:hover,
     &.selected {
@@ -125,15 +136,14 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-row-gap: $pad/4;
-  grid-column-gap: $pad;
+  grid-column-gap: $pad/2;
   .logo-sim {
     display: block;
-    height: 4rem;
+    height: 3rem;
     border-radius: 1rem;
     cursor: pointer;
     background: black;
     position: relative;
-    // border: $bord solid transparent;
     &:hover,
     &.selected {
       background: $bord-c;
@@ -147,16 +157,16 @@ body {
       background: white;
     }
     &.bottom:after {
-      bottom: $pad/3;
+      bottom: $pad/6;
     }
     &.top:after {
-      top: $pad/3;
+      top: $pad/6;
     }
     &.left:after {
-      left: $pad/3;
+      left: $pad/6;
     }
     &.right:after {
-      right: $pad/3;
+      right: $pad/6;
     }
   }
 }
@@ -164,7 +174,7 @@ body {
 #watercolor-background {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-gap: $pad;
+  grid-gap: $pad/3;
 
   a {
     cursor: pointer;
