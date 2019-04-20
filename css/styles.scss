@@ -195,8 +195,11 @@ body {
   grid-template-columns: repeat(5, 1fr);
   grid-gap: $pad/3;
 
+  &.disabled {
+    opacity: 0.3;
+  }
+
   a {
-    cursor: pointer;
     img {
       border: $bord solid transparent;
       border-radius: 50%;
@@ -205,8 +208,12 @@ body {
     width: 100%;
     display: block;
     font-size: 0;
-    &:hover img,
-    &.selected img {
+  }
+
+  &:not(.disabled) {
+    cursor: pointer;
+    a:hover img,
+    a.selected img {
       border-color: $bord-c;
     }
   }

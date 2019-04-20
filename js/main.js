@@ -125,7 +125,7 @@ function setup() {
   canvas = createCanvas(w, h);
   canvas.class("canv");
 
-  let input = createFileInput(handle_upload);
+  input = createFileInput(handle_upload);
   input.id("img-upload");
 
   let panel = select("#image-upload-panel");
@@ -168,7 +168,15 @@ function draw() {
   noLoop();
 }
 
+function remove_img() {
+  uploaded_img = "";
+  input.value = "";
+  current_tint = -1;
+}
+
 function handle_upload(file) {
+  toggle_bg(false);
+
   if (file.type === "image") {
     uploaded_img = loadImage(file.data, () => {
       redraw();

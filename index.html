@@ -112,6 +112,19 @@
     </div>
 
     <script type="text/javascript">
+      function toggle_bg(bg_img = false) {
+        if (bg_img) {
+          let tint_div = document.getElementById("tints-panel");
+          tint_div.classList.add("disabled");
+          remove_img();
+        } else {
+          let img_panel = document.getElementById("watercolor-background");
+          img_panel.classList.add("disabled");
+        }
+
+        redraw();
+      }
+
       function save_img() {
         let now = new Date();
         let clock = now.getHours() + "·" + now.getMinutes();
@@ -159,9 +172,17 @@
         };
       }
 
+      // watercolor events
       let bg_links = document.getElementsByClassName("bg-selection");
       for (let i = 0; i < bg_links.length; i++) {
         bg_links[i].onclick = function(e) {
+          if (
+            document
+              .getElementById("watercolor-background")
+              .classList.contains("disabled")
+          ) {
+            return;
+          }
           let selected = document.getElementsByClassName(
             "bg-selection selected"
           );
