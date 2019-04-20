@@ -116,13 +116,22 @@ body {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: $pad/2;
+
+  &.disabled {
+    opacity: 0.3;
+  }
+
   .tint {
-    cursor: pointer;
     min-height: 1rem;
     border: $bord solid transparent;
-    &:hover,
-    &.selected {
-      border-color: $bord-c;
+  }
+  &:not(.disabled) {
+    .tint {
+      cursor: pointer;
+      &:hover,
+      &.selected {
+        border-color: $bord-c;
+      }
     }
   }
 }
