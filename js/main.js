@@ -127,6 +127,8 @@ function setup() {
 
   let panel = select("#image-upload-panel");
   panel.child(input);
+
+  select("#control-panel").removeClass("hidden-panel");
 }
 
 function draw() {

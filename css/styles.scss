@@ -63,6 +63,16 @@ body {
   // display: none;
 }
 
+.hidden-panel {
+  & > * {
+    visibility: hidden;
+  }
+  &:after {
+    content: "Construindo painel...";
+    font-size: 20px;
+  }
+}
+
 .slider-container {
   padding: 0 $pad/2;
   input[type="range"] {
