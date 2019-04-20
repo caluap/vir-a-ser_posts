@@ -170,12 +170,13 @@ function draw() {
 
 function remove_img() {
   uploaded_img = "";
-  input.value = "";
   current_tint = -1;
 }
 
 function handle_upload(file) {
   toggle_bg(false);
+  let panel = select("#image-upload-panel");
+  panel.removeClass("no-img");
 
   if (file.type === "image") {
     uploaded_img = loadImage(file.data, () => {

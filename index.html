@@ -20,9 +20,11 @@
         <textarea id="post-text"></textarea>
       </div>
       <div id="image-panel" class="panel">
-        <div id="image-upload-panel">
+        <div id="image-upload-panel" class="no-img">
           <h3>Upload de fotografia</h3>
-          <!-- <input id="img-upload" type="file" /> -->
+          <button class="generic-button" onclick="toggle_bg(true);">
+            Remover foto
+          </button>
         </div>
         <div id="tints-panel" class="disabled">
           <h3>Matiz na fotografia</h3>
@@ -113,13 +115,23 @@
 
     <script type="text/javascript">
       function toggle_bg(bg_img = false) {
+        let tint_div = document.getElementById("tints-panel");
+        let img_panel = document.getElementById("image-upload-panel");
+        let bg_panel = document.getElementById("watercolor-background");
+
         if (bg_img) {
-          let tint_div = document.getElementById("tints-panel");
           tint_div.classList.add("disabled");
+          img_panel.classList.add("no-img");
+          bg_panel.classList.remove("disabled");
+
           remove_img();
+
+          let file_input = document.getElementById("img-upload");
+          file_input.value = "";
         } else {
-          let img_panel = document.getElementById("watercolor-background");
-          img_panel.classList.add("disabled");
+          tint_div.classList.remove("disabled");
+          img_panel.classList.remove("no-img");
+          bg_panel.classList.add("disabled");
         }
 
         redraw();
