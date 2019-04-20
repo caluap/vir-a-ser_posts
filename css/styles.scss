@@ -44,9 +44,6 @@ body {
   z-index: 0;
 }
 
-#file-input {
-}
-
 #image-upload-panel {
   display: grid;
   grid-gap: $pad/2;
@@ -61,23 +58,6 @@ body {
   .generic-button {
     @extend .small-button;
   }
-}
-
-#input-controllers {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  background: palegoldenrod;
-  padding: $pad;
-
-  display: flex;
-  align-items: center;
-  & > * {
-    flex-grow: 1;
-  }
-  // display: none;
 }
 
 .hidden-panel {
@@ -103,6 +83,7 @@ body {
 
 #control-panel {
   overflow-y: auto;
+  z-index: 1;
 
   position: fixed;
   right: 0;
