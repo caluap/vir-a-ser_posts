@@ -15,6 +15,9 @@ let w = 1080,
 let n_mods = 24;
 let mod = w / n_mods;
 
+let left_logo = false;
+let top_logo = false;
+
 let current_background = -1;
 let backgrounds = [
   {
@@ -137,14 +140,23 @@ function draw() {
   let bg_ready = draw_background(current_background);
 
   if (bg_ready || current_background == -1) {
-    // draw_logo(1, 1);
-    // draw_logo(n_mods - mods_logo - 1, 1);
-    // draw_logo(1, n_mods - mods_logo - 1);
+    if (left_logo) {
+      if (top_logo) {
+        draw_logo(1, 1);
+      } else {
+        draw_logo(1, n_mods - mods_logo - 1);
+      }
+    } else {
+      if (top_logo) {
+        draw_logo(n_mods - mods_logo - 1, 1);
+      } else {
+        draw_logo(n_mods - mods_logo - 1, n_mods - mods_logo - 1);
+      }
+    }
 
     if (uploaded_img) {
       draw_uploaded_img();
     }
-    draw_logo(n_mods - mods_logo - 1, n_mods - mods_logo - 1);
     draw_text(sample_text.slice(0, text_breakpoints[0] - 1));
   } else {
     draw_text("carregando \n imagem....");
