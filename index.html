@@ -138,7 +138,7 @@
               selected[i2].classList.remove("selected");
             }
           }
-          e.srcElement.classList.add("selected");
+          e.srcElement.parentElement.classList.add("selected");
           change_bg(i - 1);
         };
       }
