@@ -48,20 +48,48 @@
         </div>
         <div id="watercolor-background">
           <h3>Fundo aquarelado</h3>
-          <a class="selected"><img src="assets/backgrounds/mini/00.jpg"/></a>
-          <a><img src="assets/backgrounds/mini/01.jpg"/></a>
-          <a><img src="assets/backgrounds/mini/02.jpg"/></a>
-          <a><img src="assets/backgrounds/mini/03.jpg"/></a>
-          <a><img src="assets/backgrounds/mini/04.jpg"/></a>
-          <a><img src="assets/backgrounds/mini/05.jpg"/></a>
-          <a><img src="assets/backgrounds/mini/06.jpg"/></a>
-          <a><img src="assets/backgrounds/mini/07.jpg"/></a>
-          <a><img src="assets/backgrounds/mini/08.jpg"/></a>
-          <a><img src="assets/backgrounds/mini/09.jpg"/></a>
-          <a><img src="assets/backgrounds/mini/10.jpg"/></a>
-          <a><img src="assets/backgrounds/mini/11.jpg"/></a>
-          <a><img src="assets/backgrounds/mini/12.jpg"/></a>
-          <a><img src="assets/backgrounds/mini/13.jpg"/></a>
+          <a class="bg-selection selected"
+            ><img src="assets/backgrounds/mini/00.jpg"
+          /></a>
+          <a class="bg-selection"
+            ><img src="assets/backgrounds/mini/01.jpg"
+          /></a>
+          <a class="bg-selection"
+            ><img src="assets/backgrounds/mini/02.jpg"
+          /></a>
+          <a class="bg-selection"
+            ><img src="assets/backgrounds/mini/03.jpg"
+          /></a>
+          <a class="bg-selection"
+            ><img src="assets/backgrounds/mini/04.jpg"
+          /></a>
+          <a class="bg-selection"
+            ><img src="assets/backgrounds/mini/05.jpg"
+          /></a>
+          <a class="bg-selection"
+            ><img src="assets/backgrounds/mini/06.jpg"
+          /></a>
+          <a class="bg-selection"
+            ><img src="assets/backgrounds/mini/07.jpg"
+          /></a>
+          <a class="bg-selection"
+            ><img src="assets/backgrounds/mini/08.jpg"
+          /></a>
+          <a class="bg-selection"
+            ><img src="assets/backgrounds/mini/09.jpg"
+          /></a>
+          <a class="bg-selection"
+            ><img src="assets/backgrounds/mini/10.jpg"
+          /></a>
+          <a class="bg-selection"
+            ><img src="assets/backgrounds/mini/11.jpg"
+          /></a>
+          <a class="bg-selection"
+            ><img src="assets/backgrounds/mini/12.jpg"
+          /></a>
+          <a class="bg-selection"
+            ><img src="assets/backgrounds/mini/13.jpg"
+          /></a>
         </div>
       </div>
       <div id="save-panel" class="panel">
@@ -96,6 +124,22 @@
           // 0th spot, but when converting to the tint function
           // this has to be == -1
           change_tint(i - 1);
+        };
+      }
+
+      let bg_links = document.getElementsByClassName("bg-selection");
+      for (let i = 0; i < bg_links.length; i++) {
+        bg_links[i].onclick = function(e) {
+          let selected = document.getElementsByClassName(
+            "bg-selection selected"
+          );
+          if (selected) {
+            for (let i2 = 0; i2 < selected.length; i2++) {
+              selected[i2].classList.remove("selected");
+            }
+          }
+          e.srcElement.classList.add("selected");
+          change_bg(i - 1);
         };
       }
     </script>

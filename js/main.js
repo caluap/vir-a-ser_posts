@@ -121,51 +121,12 @@ function preload() {
 function setup() {
   canvas = createCanvas(w, h);
   canvas.class("canv");
-  canvas.mouseClicked(change_text);
-
-  // let controllers = createDiv();
-  // controllers.id("input-controllers");
-
-  // background slider
-  // bg_slider = createSlider(-1, backgrounds.length - 1, -1, 1);
-  // bg_slider.changed(change_bg);
-  // bg_slider.class("slider");
-  // bg_slider.id("bg-slider");
-
-  // let h_bg = createP("Aquarela de fundo").class("fake-title");
-  // p_bg = createP("Nenhuma").class("slider-data");
-
-  // let bg_slider_container = createDiv();
-  // bg_slider_container.class("slider-container");
-  // bg_slider_container.child(h_bg);
-  // bg_slider_container.child(p_bg);
-  // bg_slider_container.child(bg_slider);
-
-  // tint slider
-  // tint_slider = createSlider(-1, tints.length - 1, -1, 1);
-  // tint_slider.changed(change_tint);
-  // tint_slider.class("slider");
-  // tint_slider.id("tint-slider");
-
-  // let h_tint = createP("Cor na imagem").class("fake-title");
-  // p_tint = createP("Nenhuma").class("slider-data");
-
-  // let tint_slider_container = createDiv();
-  // tint_slider_container.class("slider-container");
-  // tint_slider_container.child(h_tint);
-  // tint_slider_container.child(p_tint);
-  // tint_slider_container.child(tint_slider);
 
   let input = createFileInput(handle_upload);
   input.id("img-upload");
 
   let panel = select("#image-upload-panel");
   panel.child(input);
-
-  // controllers.child(bg_slider_container);
-  // controllers.child(input);
-  // controllers.child(tint_slider_container);
-  // input.position(0, 0);
 }
 
 function draw() {
@@ -359,16 +320,8 @@ function draw_uploaded_img() {
 
 // controller functions
 
-function change_bg() {
-  current_background = bg_slider.value();
-  if (current_background == -1) {
-    p_bg.html("Nenhuma");
-  } else {
-    p_bg.html(backgrounds[current_background].name);
-  }
-  if (debug) {
-    console.log(current_background);
-  }
+function change_bg(i_bg) {
+  current_background = i_bg;
   redraw();
 }
 
