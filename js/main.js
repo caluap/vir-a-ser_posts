@@ -140,6 +140,9 @@ function draw() {
   let bg_ready = draw_background(current_background);
 
   if (bg_ready || current_background == -1) {
+    if (uploaded_img) {
+      draw_uploaded_img();
+    }
     if (left_logo) {
       if (top_logo) {
         draw_logo(1, 1);
@@ -152,10 +155,6 @@ function draw() {
       } else {
         draw_logo(n_mods - mods_logo - 1, n_mods - mods_logo - 1);
       }
-    }
-
-    if (uploaded_img) {
-      draw_uploaded_img();
     }
     draw_text(sample_text.slice(0, text_breakpoints[0] - 1));
   } else {
