@@ -114,6 +114,15 @@
     </div>
 
     <script type="text/javascript">
+      function clear_selected_tints() {
+        let selected = document.getElementsByClassName("tint selected");
+        if (selected) {
+          for (let i2 = 0; i2 < selected.length; i2++) {
+            selected[i2].classList.remove("selected");
+          }
+        }
+      }
+
       function toggle_bg(bg_img = false) {
         let tint_div = document.getElementById("tints-panel");
         let img_panel = document.getElementById("image-upload-panel");
@@ -125,6 +134,7 @@
           bg_panel.classList.remove("disabled");
 
           remove_img();
+          clear_selected_tints();
 
           let file_input = document.getElementById("img-upload");
           file_input.value = "";
@@ -170,12 +180,7 @@
             return;
           }
 
-          let selected = document.getElementsByClassName("tint selected");
-          if (selected) {
-            for (let i2 = 0; i2 < selected.length; i2++) {
-              selected[i2].classList.remove("selected");
-            }
-          }
+          clear_selected_tints();
           e.srcElement.classList.add("selected");
           // in my html elements, I have an “empty” element at the
           // 0th spot, but when converting to the tint function
