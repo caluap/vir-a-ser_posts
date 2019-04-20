@@ -22,7 +22,7 @@
       <div id="image-panel" class="panel">
         <div id="image-upload-panel">
           <h3>Upload de fotografia</h3>
-          <input type="file" />
+          <!-- <input id="img-upload" type="file" /> -->
         </div>
         <div id="tints-panel" class="disabled">
           <h3>Matiz na fotografia</h3>
@@ -69,6 +69,13 @@
       </div>
     </div>
 
+    <!-- <script type="text/javascript">
+      document.getElementById("img-upload").onchange = function(f) {
+        console.log(f.srcElement.files[0]);
+        let file = f.srcElement.files[0];
+        handle_upload(file);
+      };
+    </script> -->
     <script
       language="javascript"
       type="text/javascript"
