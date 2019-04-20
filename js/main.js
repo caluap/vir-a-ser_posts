@@ -135,6 +135,8 @@ function setup() {
 }
 
 function draw() {
+  let h_text = measure_text_height(sample_text);
+
   background(0);
 
   let bg_ready = draw_background(current_background);
@@ -156,7 +158,7 @@ function draw() {
         draw_logo(n_mods - mods_logo - 1, n_mods - mods_logo - 1);
       }
     }
-    draw_text(sample_text.slice(0, text_breakpoints[0] - 1));
+    draw_text(sample_text, false, h_text);
   } else {
     draw_text("carregando \n imagem....");
   }
@@ -230,17 +232,13 @@ function draw_logo(x, y) {
   }
 }
 
-function draw_text(t) {
-  let text_m = 2;
-  let text_m_y = 5 / 2;
-  let offset_y = 1;
+function draw_text(t, measure = false, h_text = -1) {
+  let tx = _mod(2),
+    ty = _mod(2),
+    tw = _mod(n_mods - 4),
+    th = _mod(n_mods - 5);
 
-  let tx = _mod(text_m),
-    ty = _mod(text_m * text_m_y - offset_y),
-    tw = _mod(n_mods - text_m * 2),
-    th = _mod(n_mods - text_m * 2 * text_m_y);
-
-  if (debug) {
+  if (debug && !measure) {
     fill(255, 0, 255, 255 / 4);
     rect(tx, ty, tw, th);
   }
@@ -252,6 +250,10 @@ function draw_text(t) {
 
   let ts,
     n = t.length;
+
+  const lines = (t.match(/\n/g) || "").length + 1;
+  n += lines * 10; // each \n counts as more than only one character
+
   if (n < text_breakpoints[0]) {
     ts = 70;
   } else if (n < text_breakpoints[1]) {
@@ -268,7 +270,11 @@ function draw_text(t) {
     align = LEFT;
   }
 
-  textAlign(align, CENTER);
+  if (measure || h_text != -1) {
+    textAlign(align, TOP);
+  } else {
+    textAlign(align, CENTER);
+  }
   textSize(ts);
 
   // some images require dark text; some, light
@@ -296,6 +302,14 @@ function draw_text(t) {
       fill(255);
     }
   }
+  if (measure) {
+    fill(0);
+  }
+  if (h_text != -1) {
+    let delta = height - h_text;
+    ty = delta / 2 - textAscent() / 2;
+  }
+
   text(t, tx, ty, tw, th);
 }
 
@@ -359,4 +373,39 @@ function change_text() {
     sample_text = new_text;
     redraw();
   }
+}
+
+function measure_text_height(t) {
+  if (t == "") {
+    return 0;
+  }
+  background(255);
+
+  draw_text(t, true);
+  let min_y = Infinity,
+    max_y = -1;
+
+  loadPixels();
+  for (let y = 0; y < height; y++) {
+    yes = true;
+    for (let x = 0; x < width; x++) {
+      let c = get(x, y);
+      // if (yes && c[0] != 255) {
+      //   console.log(c + " @ line " + y);
+      //   yes = false;
+      // }
+
+      // is there any text here?
+      if (c[0] < 255) {
+        if (y > max_y) {
+          max_y = y;
+        }
+        if (y < min_y) {
+          min_y = y;
+        }
+        continue;
+      }
+    }
+  }
+  return max_y - min_y;
 }
