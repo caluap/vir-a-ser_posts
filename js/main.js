@@ -203,6 +203,9 @@ function handle_upload(file) {
         console.log("Uploaded image loaded successfully!");
       }
     });
+
+    let tints_panel = select("#tints-panel");
+    tints_panel.removeClass("disabled");
   }
 }
 
@@ -370,16 +373,8 @@ function change_bg() {
   redraw();
 }
 
-function change_tint() {
-  current_tint = tint_slider.value();
-  if (current_tint == -1) {
-    p_tint.html("Nenhuma");
-  } else {
-    p_tint.html(tints[current_tint].name);
-  }
-  if (debug) {
-    console.log(current_tint);
-  }
+function change_tint(i_tint) {
+  current_tint = i_tint;
   redraw();
 }
 

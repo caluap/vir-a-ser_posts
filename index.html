@@ -69,13 +69,32 @@
       </div>
     </div>
 
-    <!-- <script type="text/javascript">
-      document.getElementById("img-upload").onchange = function(f) {
-        console.log(f.srcElement.files[0]);
-        let file = f.srcElement.files[0];
-        handle_upload(file);
-      };
-    </script> -->
+    <script type="text/javascript">
+      let tint_links = document.getElementsByClassName("tint");
+      for (let i = 0; i < tint_links.length; i++) {
+        tint_links[i].onclick = function(e) {
+          if (
+            document
+              .getElementById("tints-panel")
+              .classList.contains("disabled")
+          ) {
+            return;
+          }
+
+          let selected = document.getElementsByClassName("tint selected");
+          if (selected) {
+            for (let i2 = 0; i2 < selected.length; i2++) {
+              selected[i2].classList.remove("selected");
+            }
+          }
+          e.srcElement.classList.add("selected");
+          // in my html elements, I have an “empty” element at the
+          // 0th spot, but when converting to the tint function
+          // this has to be == -1
+          change_tint(i - 1);
+        };
+      }
+    </script>
     <script
       language="javascript"
       type="text/javascript"
