@@ -85,6 +85,8 @@ body {
 }
 
 #control-panel {
+  overflow-y: auto;
+
   position: fixed;
   right: 0;
   top: 0;
