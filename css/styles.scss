@@ -29,6 +29,11 @@ body {
   width: 100%;
 }
 
+.small-button {
+  font-size: 10px;
+  padding: $pad/4 $pad/2;
+}
+
 .canv {
   margin: $pad;
   transform-origin: left top;
@@ -54,8 +59,7 @@ body {
   }
 
   .generic-button {
-    font-size: 10px;
-    padding: $pad/4 $pad/2;
+    @extend .small-button;
   }
 }
 
@@ -129,11 +133,16 @@ body {
     margin-top: $pad/4;
     box-sizing: border-box;
     width: 100%;
-    font-size: 15px;
+    font-size: 14px;
     padding: $pad/3;
     border: none;
     background: #eee;
-    min-height: 8rem;
+    min-height: 6rem;
+  }
+  .generic-button {
+    margin-top: $pad/2;
+    @extend .small-button;
+    background: gray;
   }
 }
 
