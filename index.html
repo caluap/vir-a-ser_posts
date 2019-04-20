@@ -17,7 +17,7 @@
     <div id="control-panel">
       <div id="text-panel" class="panel">
         <h3>Texto</h3>
-        <textarea></textarea>
+        <textarea id="post-text"></textarea>
       </div>
       <div id="image-panel" class="panel">
         <div id="image-upload-panel">
@@ -70,6 +70,10 @@
     </div>
 
     <script type="text/javascript">
+      document.getElementById("post-text").onchange = function() {
+        change_text();
+      };
+
       let tint_links = document.getElementsByClassName("tint");
       for (let i = 0; i < tint_links.length; i++) {
         tint_links[i].onclick = function(e) {

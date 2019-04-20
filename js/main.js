@@ -111,8 +111,7 @@ let tints = [
 ];
 
 let text_breakpoints = [120, 280, 340, 440, 700, 899];
-let sample_text =
-  "Aptent a quis id scelerisque elementum donec a quis ut arcu habitant natoque posuere tempor vestibulum id faucibus leo a. Mollis scelerisque a ante quis adipiscing a accumsan tincidunt vestibulum ut mattis justo sem lobortis nascetur habitant ullamcorper mi in dui faucibus a. Mi orci cubilia blandit at suspendisse magnis ullamcorper vestibulum penatibus in potenti justo nec augue cras ac ridiculus fringilla ullamcorper condimentum etiam quisque ipsum ut pretium mattis elit imperdiet. In quam eros suscipit natoque hac hendrerit a orci montes consectetur ac adipiscing nec adipiscing commodo adipiscing pretium mi a accumsan viverra habitasse a inceptos potenti. Mus iaculis enim ut mus orci et suscipit vestibulum dapibus a fermentum non orci luctus sed ullamcorper himenaeos dis ultrices vestibulum.Facilisis scelerisque gravida dictum eget hendrerit est nam dignissim at a accumsan consequat.";
+let sample_text = "";
 
 function preload() {
   myFont = loadFont("../assets/antropos.otf");
@@ -379,8 +378,9 @@ function change_tint(i_tint) {
 }
 
 function change_text() {
-  let new_text = prompt("Digite o novo texto", "");
-  if (new_text != null && new_text != "") {
+  let new_text = select("#post-text").value();
+  console.log(new_text);
+  if (new_text != null) {
     sample_text = new_text;
     redraw();
   }
