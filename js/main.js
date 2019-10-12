@@ -19,6 +19,7 @@ let left_logo = false;
 let top_logo = false;
 
 let user_text_color = "";
+let user_text_align = null;
 
 let current_background = -1;
 let backgrounds = [
@@ -270,6 +271,9 @@ function draw_text(t, measure = false, h_text = -1) {
   } else {
     ts = 25;
     align = LEFT;
+  }
+  if (user_text_align) {
+    align = user_text_align;
   }
 
   if (measure || h_text != -1) {

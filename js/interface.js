@@ -51,6 +51,16 @@ function redraw_logo(top, left, who) {
   redraw();
 }
 
+function select_text_align(alignment, who) {
+  user_text_align = alignment;
+  let els = document.getElementsByClassName("text-align-control");
+  [].forEach.call(els, function(e) {
+    e.classList.remove("selected");
+  });
+  who.classList.add("selected");
+  redraw();
+}
+
 function update_text_color(e = null) {
   // got here from clicking on the palette
   if (e) {

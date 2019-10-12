@@ -276,7 +276,8 @@ body {
     background-position: center center;
     background-size: 75% 75%;
 
-    &:hover {
+    &:hover,
+    &.selected {
       border-color: $bord-c;
       background-color: $bord-c;
     }
