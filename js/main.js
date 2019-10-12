@@ -20,6 +20,7 @@ let top_logo = false;
 
 let user_text_color = "";
 let user_text_align = null;
+let vertical_user_text_align = null;
 
 let current_background = -1;
 let backgrounds = [
@@ -117,7 +118,7 @@ let tints = [
 ];
 
 let text_breakpoints = [120, 280, 340, 440, 700, 899];
-let sample_text = "Bazinga";
+let sample_text = "";
 
 function preload() {
   myFont = loadFont("../assets/antropos.otf");
@@ -161,8 +162,10 @@ function draw() {
         draw_logo(n_mods - mods_logo - 1, n_mods - mods_logo - 1);
       }
     }
+    textAlign(CENTER, CENTER);
     draw_text(sample_text, false, h_text);
   } else {
+    textAlign(CENTER, CENTER);
     draw_text("carregando \n imagem....");
   }
 
@@ -236,17 +239,15 @@ function draw_logo(x, y) {
 }
 
 function draw_text(t, measure = false, h_text = -1) {
-  let tx = _mod(2),
-    ty = _mod(2),
-    tw = _mod(n_mods - 4),
-    th = _mod(n_mods - 5);
-
+  let tx = _mod(1),
+    ty = _mod(1),
+    tw = width - tx * 2,
+    th = height - ty * 2;
   if (debug && !measure) {
     fill(255, 0, 255, 255 / 4);
     rect(tx, ty, tw, th);
   }
 
-  rectMode(CORNER);
   textFont(myFont);
 
   let align = CENTER;
@@ -267,20 +268,22 @@ function draw_text(t, measure = false, h_text = -1) {
     ts = 40;
   } else if (n < text_breakpoints[4]) {
     ts = 32;
-    align = LEFT;
   } else {
     ts = 25;
-    align = LEFT;
   }
   if (user_text_align) {
     align = user_text_align;
   }
 
-  if (measure || h_text != -1) {
-    textAlign(align, TOP);
+  let vert_align;
+
+  if (vertical_user_text_align) {
+    vert_align = vertical_user_text_align;
   } else {
-    textAlign(align, CENTER);
+    vert_align = CENTER;
   }
+
+  textAlign(align, vert_align);
   textSize(ts);
 
   // if the user selects a color, avoids the automatic color scheme
@@ -315,11 +318,6 @@ function draw_text(t, measure = false, h_text = -1) {
     if (measure) {
       fill(0);
     }
-  }
-
-  if (h_text != -1) {
-    let delta = height - h_text;
-    ty = delta / 2 - textAscent() / 2;
   }
 
   text(t, tx, ty, tw, th);

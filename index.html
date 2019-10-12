@@ -20,9 +20,18 @@
         <textarea id="post-text"></textarea>
         <div id="text-placement">
           <h3>Posição do texto</h3>
-          <a class="logo-sim top"></a>
-          <a class="logo-sim center selected"></a>
-          <a class="logo-sim bottom"></a>
+          <a
+            class="vert-text-align-control logo-sim top"
+            onclick="select_vertical_text_align(TOP, this)"
+          ></a>
+          <a
+            class="vert-text-align-control logo-sim center selected"
+            onclick="select_vertical_text_align(CENTER, this)"
+          ></a>
+          <a
+            class="vert-text-align-control logo-sim bottom"
+            onclick="select_vertical_text_align(BOTTOM, this)"
+          ></a>
         </div>
         <div id="text-align">
           <h3>Alinhamento do texto</h3>
@@ -31,7 +40,7 @@
             onclick="select_text_align(LEFT, this)"
           ></a>
           <a
-            class="text-align-control align-center"
+            class="text-align-control align-center selected"
             onclick="select_text_align(CENTER, this)"
           ></a>
           <a

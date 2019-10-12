@@ -61,6 +61,16 @@ function select_text_align(alignment, who) {
   redraw();
 }
 
+function select_vertical_text_align(alignment, who) {
+  vertical_user_text_align = alignment;
+  let els = document.getElementsByClassName("vert-text-align-control");
+  [].forEach.call(els, function(e) {
+    e.classList.remove("selected");
+  });
+  who.classList.add("selected");
+  redraw();
+}
+
 function update_text_color(e = null) {
   // got here from clicking on the palette
   if (e) {
