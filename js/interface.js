@@ -1,5 +1,5 @@
 function clear_selected_tints() {
-  let selected = document.getElementsByClassName("tint selected");
+  let selected = document.getElementsByClassName("img-tint selected");
   if (selected) {
     for (let i2 = 0; i2 < selected.length; i2++) {
       selected[i2].classList.remove("selected");
@@ -53,7 +53,7 @@ document.getElementById("post-text").onchange = function() {
   change_text();
 };
 
-let tint_links = document.getElementsByClassName("tint");
+let tint_links = document.getElementsByClassName("img-tint");
 for (let i = 0; i < tint_links.length; i++) {
   tint_links[i].onclick = function(e) {
     if (document.getElementById("tints-panel").classList.contains("disabled")) {
