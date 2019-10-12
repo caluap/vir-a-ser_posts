@@ -131,9 +131,22 @@ body {
   }
 }
 
+#text-color {
+  grid-template-columns: repeat(9, 1fr);
+  margin-top: $pad/2;
+  margin-bottom: $pad * 2/3;
+  input {
+    grid-column: 1 / -1;
+  }
+}
+
 #tints-panel {
-  display: grid;
   grid-template-columns: repeat(5, 1fr);
+}
+
+#tints-panel,
+#text-color {
+  display: grid;
   grid-gap: $pad/2;
 
   &.disabled {
