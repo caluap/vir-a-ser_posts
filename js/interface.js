@@ -55,7 +55,6 @@ function update_text_color(e = null) {
   // got here from clicking on the palette
   if (e) {
     let color = rgb2hex(e.style.backgroundColor);
-    document.getElementById("text-color-input").value = color;
     let selected = document.getElementsByClassName("text-tint selected");
     if (selected) {
       for (let i = 0; i < selected.length; i++) {
@@ -65,31 +64,6 @@ function update_text_color(e = null) {
     e.classList.add("selected");
     user_text_color = color;
     redraw();
-  } else {
-    let field = document.getElementById("text-color-input");
-    let color = field.value;
-    let colorOk = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i.test(color);
-    if (!colorOk) {
-      if (!field.classList.contains("invalid-value")) {
-        field.classList.add("invalid-value");
-      }
-    } else {
-      user_text_color = color;
-      redraw();
-
-      if (field.classList.contains("invalid-value")) {
-        field.classList.remove("invalid-value");
-      }
-      let img_tint_els = document.getElementsByClassName("text-tint");
-      [].forEach.call(img_tint_els, function(tint_el) {
-        let aux_c = rgb2hex(tint_el.style.backgroundColor);
-        if (aux_c == color && !tint_el.classList.contains("selected")) {
-          tint_el.classList.add("selected");
-        } else {
-          tint_el.classList.remove("selected");
-        }
-      });
-    }
   }
 }
 
@@ -113,10 +87,6 @@ let img_tint_els = document.getElementsByClassName("text-tint");
     update_text_color(e);
   };
 });
-
-document.getElementById("text-color-input").onchange = function() {
-  update_text_color();
-};
 
 document.getElementById("post-text").onchange = function() {
   change_text();
