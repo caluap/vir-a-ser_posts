@@ -37,6 +37,7 @@ function save_img() {
   let day = now.toJSON().slice(0, 10);
   saveCanvas(canvas, "post-" + day + "-" + clock, "jpg");
 }
+
 function redraw_logo(top, left, who) {
   top_logo = top;
   left_logo = left;
@@ -49,6 +50,43 @@ function redraw_logo(top, left, who) {
   who.classList.add("selected");
   redraw();
 }
+
+function update_text_color(e = null) {
+  // got here from clicking on the palette
+  if (e) {
+    let bg = e.style.backgroundColor;
+    document.getElementById("text-color-input").value = rgb2hex(bg);
+    let selected = document.getElementsByClassName("text-tint selected");
+    if (selected) {
+      console.log(selected);
+      selected[0].classList.remove("selected");
+    }
+    e.classList.add("selected");
+  } else {
+  }
+}
+
+//Function to convert hex format to a rgb color
+//https://jsfiddle.net/Mottie/xcqpF/1/light/
+function rgb2hex(rgb) {
+  rgb = rgb.match(
+    /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i
+  );
+  return rgb && rgb.length === 4
+    ? "#" +
+        ("0" + parseInt(rgb[1], 10).toString(16)).slice(-2) +
+        ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) +
+        ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2)
+    : "";
+}
+
+let img_tint_els = document.getElementsByClassName("text-tint");
+[].forEach.call(img_tint_els, function(e) {
+  e.onclick = function() {
+    update_text_color(e);
+  };
+});
+
 document.getElementById("post-text").onchange = function() {
   change_text();
 };
