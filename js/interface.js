@@ -54,13 +54,17 @@ function redraw_logo(top, left, who) {
 function update_text_color(e = null) {
   // got here from clicking on the palette
   if (e) {
-    let bg = e.style.backgroundColor;
-    document.getElementById("text-color-input").value = rgb2hex(bg);
+    let color = rgb2hex(e.style.backgroundColor);
+    document.getElementById("text-color-input").value = color;
     let selected = document.getElementsByClassName("text-tint selected");
     if (selected) {
-      selected[0].classList.remove("selected");
+      for (let i = 0; i < selected.length; i++) {
+        selected[i].classList.remove("selected");
+      }
     }
     e.classList.add("selected");
+    user_text_color = color;
+    redraw();
   } else {
     let field = document.getElementById("text-color-input");
     let color = field.value;
@@ -70,6 +74,9 @@ function update_text_color(e = null) {
         field.classList.add("invalid-value");
       }
     } else {
+      user_text_color = color;
+      redraw();
+
       if (field.classList.contains("invalid-value")) {
         field.classList.remove("invalid-value");
       }

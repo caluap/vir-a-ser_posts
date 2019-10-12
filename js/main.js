@@ -18,6 +18,8 @@ let mod = w / n_mods;
 let left_logo = false;
 let top_logo = false;
 
+let user_text_color = "";
+
 let current_background = -1;
 let backgrounds = [
   {
@@ -114,7 +116,7 @@ let tints = [
 ];
 
 let text_breakpoints = [120, 280, 340, 440, 700, 899];
-let sample_text = "";
+let sample_text = "Bazinga";
 
 function preload() {
   myFont = loadFont("../assets/antropos.otf");
@@ -277,34 +279,40 @@ function draw_text(t, measure = false, h_text = -1) {
   }
   textSize(ts);
 
-  // some images require dark text; some, light
-  if (current_background != -1 && !uploaded_img) {
-    fill(backgrounds[current_background].text_color);
+  // if the user selects a color, avoids the automatic color scheme
+  if (user_text_color != "") {
+    fill(user_text_color);
   } else {
-    if (uploaded_img) {
-      let sum_c = 0;
-      loadPixels();
-      for (let x = tx; x < tw; x++) {
-        for (let y = ty; y < th; y++) {
-          let off = y * width + x;
-          sum_c += (pixels[off] + pixels[off + 1] + pixels[off + 2]) / 3;
+    // some images require dark text; some, light
+    if (current_background != -1 && !uploaded_img) {
+      fill(backgrounds[current_background].text_color);
+    } else {
+      if (uploaded_img) {
+        let sum_c = 0;
+        loadPixels();
+        for (let x = tx; x < tw; x++) {
+          for (let y = ty; y < th; y++) {
+            let off = y * width + x;
+            sum_c += (pixels[off] + pixels[off + 1] + pixels[off + 2]) / 3;
+          }
         }
-      }
-      let avg = sum_c / ((tw - tx) * (th - ty));
-      // lightish gray (it prefers to choose white text)
-      if (avg > (255 * 3) / 4) {
-        fill(0);
+        let avg = sum_c / ((tw - tx) * (th - ty));
+        // lightish gray (it prefers to choose white text)
+        if (avg > (255 * 3) / 4) {
+          fill(0);
+        } else {
+          // darkish gray
+          fill(255);
+        }
       } else {
-        // darkish gray
         fill(255);
       }
-    } else {
-      fill(255);
+    }
+    if (measure) {
+      fill(0);
     }
   }
-  if (measure) {
-    fill(0);
-  }
+
   if (h_text != -1) {
     let delta = height - h_text;
     ty = delta / 2 - textAscent() / 2;
