@@ -41,7 +41,7 @@ function save_img() {
 function redraw_logo(top, left, who) {
   top_logo = top;
   left_logo = left;
-  let selected = document.getElementsByClassName("logo-sim selected");
+  let selected = document.getElementsByClassName("logo-pos selected");
   if (selected) {
     for (let i2 = 0; i2 < selected.length; i2++) {
       selected[i2].classList.remove("selected");
