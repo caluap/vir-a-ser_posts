@@ -17,6 +17,11 @@ body {
   // overflow-y: hidden;
 }
 
+.generic-field {
+  font-size: 14px;
+  padding: $pad/3;
+}
+
 .generic-button {
   cursor: pointer;
   background: black;
@@ -111,12 +116,11 @@ body {
 #text-panel {
   grid-gap: 0;
   textarea {
+    @extend .generic-field;
     margin-top: $pad/4;
     margin-bottom: $pad/2;
     box-sizing: border-box;
     width: 100%;
-    font-size: 14px;
-    padding: $pad/3;
     border: none;
     background: #eee;
     min-height: 6rem;
@@ -137,6 +141,8 @@ body {
   margin-bottom: $pad * 2/3;
   input {
     grid-column: 1 / -1;
+    @extend .generic-field;
+    text-align: center;
   }
 }
 
