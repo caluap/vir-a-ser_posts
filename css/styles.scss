@@ -20,6 +20,11 @@ body {
 .generic-field {
   font-size: 14px;
   padding: $pad/3;
+  border: 1px solid black;
+  &.invalid-value {
+    background: rgba(255, 0, 0, 0.2);
+    border-color: red;
+  }
 }
 
 .generic-button {
