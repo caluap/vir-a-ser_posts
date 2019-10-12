@@ -18,8 +18,23 @@
       <div id="text-panel" class="panel">
         <h3>Texto</h3>
         <textarea id="post-text"></textarea>
+        <div id="text-placement">
+          <h3>Posição do texto</h3>
+          <a class="logo-sim top left"></a>
+          <a class="logo-sim bottom left"></a>
+          <a class="logo-sim bottom right selected"></a>
+          <a class="logo-sim top right"></a>
+        </div>
+        <div id="text-align">
+          <h3>Alinhamento do texto</h3>
+        </div>
+        <div id="text-color">
+          <h3>Cor do texto</h3>
+        </div>
+
         <button class="generic-button">Atualizar texto</button>
       </div>
+      <hr />
       <div id="image-panel" class="panel">
         <div id="image-upload-panel" class="no-img">
           <h3>Upload de fotografia</h3>
@@ -41,6 +56,8 @@
           <a class="tint" style="background: #B22222;"></a>
         </div>
       </div>
+
+      <hr />
       <div id="misc-panel" class="panel">
         <div id="logo-placement">
           <h3>Posição do logo</h3>
@@ -61,6 +78,8 @@
             onclick="redraw_logo(true, false, this);"
           ></a>
         </div>
+
+        <hr />
         <div id="watercolor-background">
           <h3>Fundo aquarelado</h3>
           <a class="bg-selection selected"
@@ -107,6 +126,7 @@
           /></a>
         </div>
       </div>
+      <hr />
       <div id="save-panel" class="panel">
         <button class="generic-button" onclick="save_img()">
           Salvar
