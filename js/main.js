@@ -238,11 +238,12 @@ function draw_logo(x, y) {
   }
 }
 
-function draw_text(t, measure = false, h_text = -1) {
+function draw_text(t, measure = false) {
   let tx = _mod(1),
     ty = _mod(1),
     tw = width - tx * 2,
     th = height - ty * 2;
+
   if (debug && !measure) {
     fill(255, 0, 255, 255 / 4);
     rect(tx, ty, tw, th);
