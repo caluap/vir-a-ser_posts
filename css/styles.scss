@@ -160,30 +160,24 @@ body {
   grid-gap: $pad;
 }
 
-#logo-placement,
-#text-placement {
-  display: grid;
+.white-but {
+  display: block;
+  height: 3rem;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  cursor: pointer;
+  background: black;
+  position: relative;
+}
+
+#logo-placement {
   grid-template-columns: repeat(4, 1fr);
-  grid-row-gap: $pad/4;
-  grid-column-gap: $pad/2;
   .logo-sim {
-    display: block;
-    height: 3rem;
-    border-radius: 1rem;
-    cursor: pointer;
-    background: black;
-    position: relative;
-    &:hover,
-    &.selected {
-      background: $bord-c;
-    }
     &:after {
-      content: "";
-      position: absolute;
       width: $pad;
       height: $pad;
       border-radius: 50%;
-      background: white;
+      position: absolute;
     }
     &.bottom:after {
       bottom: $pad/6;
@@ -200,14 +194,64 @@ body {
   }
 }
 
+#text-placement {
+  grid-template-columns: repeat(3, 1fr);
+  .logo-sim {
+    display: flex;
+    padding: $pad/6 $pad/3;
+    &:after {
+      width: 100%;
+      height: $pad/2;
+      border-radius: $pad;
+    }
+    &.top {
+      align-items: flex-start;
+    }
+    &.center {
+      align-items: center;
+    }
+    &.bottom {
+      align-items: flex-end;
+    }
+  }
+}
+
+#logo-placement,
+#text-placement {
+  display: grid;
+  grid-row-gap: $pad/4;
+  grid-column-gap: $pad/2;
+  .logo-sim {
+    @extend .white-but;
+    &:after {
+      content: "";
+      background: white;
+    }
+    &:hover,
+    &.selected {
+      background: $bord-c;
+    }
+  }
+}
+
 #text-align {
   display: grid;
+  margin-bottom: $pad/2;
   grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: $pad/4;
+  grid-column-gap: $pad/2;
   h3 {
     grid-column: 1 / span 3;
   }
   a {
     grid-row: 2;
+    @extend .white-but;
+    &.align-left {
+    }
+    &.align-center {
+    }
+    &.align-right {
+    }
   }
 }
 
