@@ -242,12 +242,7 @@ function draw_text(t, measure = false) {
   let tx = _mod(1),
     ty = _mod(1),
     tw = width - tx * 2,
-    th = height - ty * 2;
-
-  if (debug && !measure) {
-    fill(255, 0, 255, 255 / 4);
-    rect(tx, ty, tw, th);
-  }
+    th = height - ty * 4;
 
   textFont(myFont);
 
@@ -286,6 +281,15 @@ function draw_text(t, measure = false) {
 
   textAlign(align, vert_align);
   textSize(ts);
+
+  if (vert_align == BOTTOM || vert_align == CENTER) {
+    th -= ts * (lines - 1);
+  }
+
+  if (debug && !measure) {
+    fill(255, 0, 255, 255 / 4);
+    rect(tx, ty, tw, th);
+  }
 
   // if the user selects a color, avoids the automatic color scheme
   if (user_text_color != "") {
@@ -379,7 +383,9 @@ function change_tint(i_tint) {
 
 function change_text() {
   let new_text = select("#post-text").value();
-  console.log(new_text);
+  if (debug) {
+    console.log(new_text);
+  }
   if (new_text != null) {
     sample_text = new_text;
     redraw();
